@@ -23,11 +23,11 @@ wiredImages({ error, data }) {
     }
 }
 
-    connectedCallback() {
+   connectedCallback() {
         this.startSlideShow();
     }
 
-      startSlideShow() {
+    startSlideShow() {
         setInterval(() => {
             this.currentIndex = (this.currentIndex + 1) % this.images.length;
         }, 2000);
@@ -36,4 +36,6 @@ wiredImages({ error, data }) {
     get selectedImage() {
         return this.images.length > 0 ? this.images[this.currentIndex] : '';
     }
+
+ 
 }

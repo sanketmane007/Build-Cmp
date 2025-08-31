@@ -1,5 +1,24 @@
 <template>
-    <div class="carousel-container" if:true={images.length}>
-        <img src={selectedImage} alt="Carousel Image" class="carousel-image"/>
-    </div>
+    <lightning-layout vertical-align="stretch" multiple-rows="true" class="x-large">
+
+        <lightning-layout-item padding="around-small" flexibility="auto">
+
+            <!-- <template for:each={images} for:item="image">
+                    <img 
+                        key={image}
+                        src={image}
+                        alt="Carousel Image"
+                        style="width:50%; height:40%; padding:10px;"
+                    />
+                </template> -->
+            <template if:true={images}>
+<div style="display: flex; justify-content: center; align-items: center; height: 50%; background-color:azure">
+                <img key={selectedImage} src={selectedImage} alt="Carousel Image"
+                    style="width:80%; height:100%; padding:10px;" />
+</div>
+
+            </template>
+
+        </lightning-layout-item>
+    </lightning-layout>
 </template>
