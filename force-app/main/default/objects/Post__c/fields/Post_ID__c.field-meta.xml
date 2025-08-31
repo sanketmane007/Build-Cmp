@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Post_ID__c</fullName>
+    <description>this is Post Unique Id</description>
+    <displayFormat>PO-{00000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Post ID</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>
