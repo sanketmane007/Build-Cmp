@@ -13,7 +13,7 @@ wiredImages({ error, data }) {
        
     this.images = data.map(record => {
                 let newRecord; //= { ...record }; // Create a new object to avoid direct mutation
-                newRecord = 'https://github.com/sanketmane007/Build-Cmp/blob/Version_1/'+record.URL__c;
+                newRecord = 'https://raw.githubusercontent.com/sanketmane007/Build-Cmp/Version_1/'+record.URL__c;
                 return newRecord;
             });
         console.log('image==>>>>'+JSON.stringify(this.images));
