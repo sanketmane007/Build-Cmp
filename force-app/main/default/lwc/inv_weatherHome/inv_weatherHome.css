@@ -1,0 +1,12 @@
+.child-components {
+    display: flex;
+    flex-direction: column; /* Change to row if you want them side-by-side */
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.child-responsive {
+    width: 100%; /* Responsive width to fit the parent */
+    max-width: 800px; /* Set maximum limits */
+}

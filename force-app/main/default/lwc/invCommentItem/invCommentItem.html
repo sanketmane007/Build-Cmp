@@ -1,0 +1,14 @@
+<template>
+    <template if:true={viewMode}>
+    <lightning-formatted-text value={content}></lightning-formatted-text>
+    <lightning-button label="Edit" onclick={handleEdit} class="slds-m-top_medium"></lightning-button>
+    </template>
+    <template if:false={viewMode}>
+        <div class="comment">
+            <lightning-textarea name="myTextArea" value={content} label="Comments" onchange={handleContentChange}>
+            </lightning-textarea>
+            <lightning-button label="Save" onclick={handleSave} class="slds-m-top_medium"></lightning-button>
+        </div>
+    </template>
+
+</template>

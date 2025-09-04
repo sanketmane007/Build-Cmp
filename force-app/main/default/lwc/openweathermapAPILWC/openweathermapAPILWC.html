@@ -1,0 +1,72 @@
+<template>
+    <!-- Lightning Card for Weather API -->
+    <lightning-card title="Weather API">
+        <!-- Container for input and button -->
+        <div class="slds-var-m-around_medium">
+            <!-- Input for city name -->
+            <lightning-input label="Enter City Name" value={changeCityName} type="text" onchange={handleCityChange}>
+            </lightning-input>
+            <!-- Button to fetch weather data -->
+            <lightning-button label="Get Weather" variant="brand" onclick={getWeatherData}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+
+    <lightning-card>
+
+        <div class="weather-container">
+            <lightning-layout multiple-rows="true">
+
+                <lightning-layout-item padding="around-small" size="12">
+                    <div class="page-section page-header">
+                        <h1>Weather in {cityName}</h1>
+                        <div class="weather-main">
+                            <img src={weatherIconUrl} alt={weatherMain} />
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12">
+                    <p>{weatherDescription}</p>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item padding="around-small" size="1">
+
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="3">
+                            <p>Temperature: {temperature}°C</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="3">
+                            <p>Feels Like: {feelsLikeTemperature}°C</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="3">
+                            <p>Humidity: {humidity}%</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="2">
+
+                        </lightning-layout-item>
+
+                        <lightning-layout-item padding="around-small" size="1">
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="3">
+                            <p>Pressure: {pressure} hPa</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="3">
+                            <p>Visibility: {visibility} m</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="3">
+                            <p>Wind Speed: {windSpeed} m/s</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="2">
+                            <p>Wind Direction: {windDirection}°</p>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+        </div>
+
+    </lightning-card>
+
+</template>

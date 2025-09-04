@@ -1,0 +1,32 @@
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-container h1, 
+.about-container h2 {
+    color: #02aebd;
+}
+
+.about-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-container li {
+    margin-bottom: 20px;
+}
+
+.about-container strong {
+    color: #00364d;
+}

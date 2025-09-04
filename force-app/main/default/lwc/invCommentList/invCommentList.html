@@ -1,0 +1,10 @@
+<template>
+    <template if:true={comments}>
+        <template for:each={comments} for:item="comment">
+            <c-inv-comment-item key={comment.Id} comment={comment}></c-inv-comment-item>
+        </template>
+    </template>
+    <template if:true={error}>
+        <p>{error}</p>
+    </template>
+</template>

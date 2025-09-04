@@ -1,24 +1,15 @@
 <template>
-    <lightning-layout vertical-align="stretch" multiple-rows="true" class="x-large">
+    <lightning-layout multiple-rows="true">
 
         <lightning-layout-item padding="around-small" flexibility="auto">
-
-            <!-- <template for:each={images} for:item="image">
-                    <img 
-                        key={image}
-                        src={image}
-                        alt="Carousel Image"
-                        style="width:50%; height:40%; padding:10px;"
-                    />
-                </template> -->
+            <!-- <h2><b>Note:</b> The images displayed here are AI generated.</h2> -->
             <template if:true={images}>
-<div style="display: flex; justify-content: center; align-items: center; height: 50%; background-color:azure">
-                <img key={selectedImage} src={selectedImage} alt="Carousel Image"
-                    style="width:80%; height:100%; padding:10px;" />
-</div>
-
+                <div
+                    style="display: flex; justify-content: center; align-items: center; height: 55%; background-color:rgb(252, 255, 248)">
+                    <img key={selectedImage} src={selectedImage} alt="Carousel Image"
+                        style="width:80%; height:100%; padding:10px;" />
+                </div>
             </template>
-
         </lightning-layout-item>
     </lightning-layout>
 </template>
