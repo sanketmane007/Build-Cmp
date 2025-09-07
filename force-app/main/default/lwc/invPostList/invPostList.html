@@ -1,7 +1,5 @@
-<template>
-    <lightning-card>
+<template>      
         <template for:each={posts} for:item="post">
             <c-inv-post-item key={post.Id} post={post}></c-inv-post-item>
         </template>
-    </lightning-card>
 </template>

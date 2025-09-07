@@ -16,4 +16,5 @@ export default class InvCommentList extends LightningElement {
             this.comments = undefined;
         }
     }
+    
 }

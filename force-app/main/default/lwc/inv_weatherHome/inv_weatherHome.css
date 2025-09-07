@@ -4,9 +4,11 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
+    
 }
 
 .child-responsive {
     width: 100%; /* Responsive width to fit the parent */
     max-width: 800px; /* Set maximum limits */
+    max-height: 30%;
 }

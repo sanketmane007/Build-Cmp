@@ -1,4 +1,4 @@
-public with sharing class Inv_ImageController {
+public without sharing class Inv_ImageController {
     
     @AuraEnabled(cacheable=true)
     public static List<Image__c> getImages(String Source, String Display_Name,String Variable) {

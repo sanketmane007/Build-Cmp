@@ -20,10 +20,32 @@ export default class InvCommentItem extends LightningElement {
             .then(result => {
                 console.log('result ===>>' + result);
                 this.viewMode = true;
+                 const messageData = {
+                         message: "Comment Updated Successfully",
+                         theme: "success",
+                         label: "Success!"
+                    };
+                    this.alertMethod(messageData);
             })
             .catch(error => {
-                console.log('error ===>>' + JSON.stringify(error));
+                 const messageData = {
+                         message: error.getMessage(),
+                         theme: "Error",
+                         label: "Error!"
+                    };
+                    this.alertMethod(messageData);
+                    console.log('error ===>>' + JSON.stringify(error));
             })
     }
+    handleCancel(){
+          this.viewMode = true;
+     }
 
+     //== Show Alert Message based on Result like Toast message
+     alertMethod(messageData) {
+          const childComponent = this.template.querySelector('c-inv-alert-component');
+          if (childComponent) {
+               childComponent.handleAlertClick(messageData); // Call the child's method
+          }
+     }
 }

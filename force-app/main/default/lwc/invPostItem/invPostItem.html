@@ -1,29 +1,85 @@
 <template>
-    <lightning-card title={post.Title__c}>
-
-        <template if:true={viewMode}>
-             <div class="slds-p-around_medium">
-                    <lightning-formatted-rich-text value={content}></lightning-formatted-rich-text>
-             
+    <div class="slds-box slds-border_bottom">
+        <template if:true={isSpinning}>
+            <!-- Spinner LWC CMP  InvgalaxySpinner -->
+            <div class="spinner-overlay">
+                <c-invgalaxy-spinner is-spinning={isSpinning} class="slds-text-align_center"></c-invgalaxy-spinner>
             </div>
-            <div class="slds-p-around_medium">
-                <lightning-button label="Edit" onclick={handleEdit} class="slds-m-top_medium">
-                     </lightning-button>
-            </div>
-           
         </template>
+        <div>
+            <c-inv-alert-component></c-inv-alert-component>
+        </div>
 
-        <template if:false={viewMode}>
-            <div class="slds-p-around_medium">
-                    <lightning-input-rich-text value={content} placeholder='' onchange={handleContentChange}>
-                    </lightning-input-rich-text>
+        <lightning-layout>
+            <lightning-layout-item size="2">
+                <lightning-icon icon-name="action:user" alternative-text="profile_alt" size="medium"
+                    title="profile_alt"></lightning-icon>
+                <b class="slds-p-left_x-small">{UserName}</b>
+            </lightning-layout-item>
+            <lightning-layout-item size="8">
+                <template if:true={viewMode}>
+                    <lightning-layout>
+                        <lightning-layout-item size="10">
+                            <lightning-formatted-rich-text value={content}
+                                class="rich-text-display"></lightning-formatted-rich-text>
+                            <p> CreatedDate: {createdDateAndTime}</p>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="2">
+                            <lightning-button-icon icon-name="action:edit" alternative-text="Edit" title="Edit"
+                                onclick={handleEdit}></lightning-button-icon>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+
+                <template if:false={viewMode}>
+                    <div class="post-section">
+                        <h2>Create a Post</h2>
+                        <div class="slds-p-around_medium">
+                            <lightning-input-rich-text value={content} placeholder='' onchange={handleContentChange}>
+                            </lightning-input-rich-text>
+                            <p> CreatedDate: {createdDateAndTime}</p>
+                        </div>
+
+                        <lightning-button class="slds-var-p-around_small" label="Save" icon-name="utility:save"
+                            icon-position="left" onclick={handleSave}>
+                        </lightning-button>
+                        <lightning-button class="slds-var-p-around_small" label="Cancel" icon-name="utility:close"
+                            icon-position="left" onclick={handleCancel}>
+                        </lightning-button>
+
+                        <!-- <lightning-button-icon icon-name="utility:save" alternative-text="Save" title="Save"
+                            onclick={handleSave} class="slds-var-p-around_small"></lightning-button-icon>
+                        <lightning-button-icon icon-name="utility:close" alternative-text="Cancel" title="Edit"
+                            onclick={handleCancel} class="slds-var-p-around_small"></lightning-button-icon> -->
+
+                    </div>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="slds-p-around_medium">
+            <lightning-layout>
+                <lightning-layout-item size="2">
+
+                </lightning-layout-item>
+                <lightning-layout-item size="1">
+                    <lightning-button label="Comments" icon-name="utility:comments" icon-position="left"
+                        onclick={handleCommentView}>
+                    </lightning-button>
+                    <!-- <lightning-button-icon icon-name='utility:comments' onclick={handleCommentView}
+                        alternative-text='comments' variant='brand' size='large' title='comments' label="Comments"
+                        icon-position="right">
+                    </lightning-button-icon> -->
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <template lwc:if={commentView}>
+                <div class="slds-p-around_small">
+                    <c-inv-comment-list post-id={post.Id}></c-inv-comment-list>
                 </div>
-            <div class="slds-p-around_medium">
-                <lightning-button label="Save" onclick={handleSave} class="slds-p-around_medium"></lightning-button>
-                <lightning-button label="Cancel" onclick={handleCancel} class="slds-p-around_medium"></lightning-button>
-            </div>
-        </template>
-        <br />
-        <c-inv-comment-list post-id={post.Id}></c-inv-comment-list>
-    </lightning-card>
+            </template>
+        </div>
+    </div>
 </template>

@@ -5,9 +5,9 @@
             <!-- <h2><b>Note:</b> The images displayed here are AI generated.</h2> -->
             <template if:true={images}>
                 <div
-                    style="display: flex; justify-content: center; align-items: center; height: 55%; background-color:rgb(252, 255, 248)">
+                    style="display: flex; justify-content: center; align-items: center; max-height: 30%; background-color:rgb(252, 255, 248)">
                     <img key={selectedImage} src={selectedImage} alt="Carousel Image"
-                        style="width:80%; height:100%; padding:10px;" />
+                        style="width:80%; height:40%; padding:10px;" />
                 </div>
             </template>
         </lightning-layout-item>

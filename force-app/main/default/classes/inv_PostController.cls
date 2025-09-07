@@ -1,10 +1,11 @@
-public with sharing class inv_PostController {
+public without sharing class inv_PostController {
     @AuraEnabled(cacheable=true)
     public static List<Post__c> getPosts() {
         // Fetch all posts along with related comments
-        return [SELECT Id, Title__c, Content__c,
+        return [SELECT Id, Title__c, Content__c,User__c,Created_At__c,CreatedDate,User__r.FirstName,User__r.LastName,
                     (SELECT Id, Content__c, CreatedById
-                    FROM Comments__r)
+                    FROM Comments__r),
+                    User__r.Name
             FROM Post__c ORDER BY Created_At__c DESC LIMIT 30];
     }
     

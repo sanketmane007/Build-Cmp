@@ -1,4 +1,11 @@
 <template>
+
+    <template if:true={isSpinning}>
+        <!-- Spinner LWC CMP  InvgalaxySpinner -->
+        <div class="spinner-overlay">
+            <c-invgalaxy-spinner is-spinning={isSpinning} class="slds-text-align_center"></c-invgalaxy-spinner>
+        </div>
+    </template>"
     <!-- Lightning Card for Weather API -->
     <lightning-card title="Weather API">
         <!-- Container for input and button -->
@@ -12,21 +19,21 @@
         </div>
     </lightning-card>
 
-    <lightning-card>
-
+     <lightning-card>
+        <template if:true={weatherData}>
         <div class="weather-container">
             <lightning-layout multiple-rows="true">
 
                 <lightning-layout-item padding="around-small" size="12">
                     <div class="page-section page-header">
-                        <h1>Weather in {cityName}</h1>
+                        <h1>Weather in {changeCityName}</h1>
                         <div class="weather-main">
-                            <img src={weatherIconUrl} alt={weatherMain} />
+                            <img src={weatherData.iconURL} alt={weatherData.Main} />
                         </div>
                     </div>
                 </lightning-layout-item>
                 <lightning-layout-item padding="around-small" size="12">
-                    <p>{weatherDescription}</p>
+                    <p>{weatherData.description}</p>
                 </lightning-layout-item>
                 <lightning-layout-item padding="around-small" size="12">
                     <lightning-layout multiple-rows="true">
@@ -34,13 +41,13 @@
 
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="3">
-                            <p>Temperature: {temperature}°C</p>
+                            <p>Temperature: {weatherData.temperature}°C</p>
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="3">
-                            <p>Feels Like: {feelsLikeTemperature}°C</p>
+                            <p>Feels Like: {weatherData.feelsLike}°C</p>
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="3">
-                            <p>Humidity: {humidity}%</p>
+                            <p>Humidity: {weatherData.humidity}%</p>
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="2">
 
@@ -49,16 +56,16 @@
                         <lightning-layout-item padding="around-small" size="1">
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="3">
-                            <p>Pressure: {pressure} hPa</p>
+                            <p>Pressure: {weatherData.pressure} hPa</p>
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="3">
-                            <p>Visibility: {visibility} m</p>
+                            <p>Visibility: {weatherData.visibility} m</p>
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="3">
-                            <p>Wind Speed: {windSpeed} m/s</p>
+                            <p>Wind Speed: {weatherData.windSpeed} m/s</p>
                         </lightning-layout-item>
                         <lightning-layout-item padding="around-small" size="2">
-                            <p>Wind Direction: {windDirection}°</p>
+                            <p>Wind Direction: {weatherData.windDirection}°</p>
                         </lightning-layout-item>
                     </lightning-layout>
                 </lightning-layout-item>
@@ -66,7 +73,8 @@
             </lightning-layout>
 
         </div>
+        </template>
 
-    </lightning-card>
+    </lightning-card> 
 
 </template>

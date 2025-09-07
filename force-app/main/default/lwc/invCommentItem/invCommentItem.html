@@ -1,14 +1,61 @@
 <template>
-    <template if:true={viewMode}>
-    <lightning-formatted-text value={content}></lightning-formatted-text>
-    <lightning-button label="Edit" onclick={handleEdit} class="slds-m-top_medium"></lightning-button>
-    </template>
-    <template if:false={viewMode}>
-        <div class="comment">
-            <lightning-textarea name="myTextArea" value={content} label="Comments" onchange={handleContentChange}>
-            </lightning-textarea>
-            <lightning-button label="Save" onclick={handleSave} class="slds-m-top_medium"></lightning-button>
+     <div>
+            <c-inv-alert-component></c-inv-alert-component>
         </div>
-    </template>
+    <lightning-layout>
+        <lightning-layout-item size="2">
+        </lightning-layout-item>
+        <lightning-layout-item size="8">
+            <template if:true={viewMode}>
+                <lightning-layout>
+                    <lightning-layout-item size="9">
+                        <lightning-formatted-text value={content}></lightning-formatted-text>
+                    </lightning-layout-item>
 
+                    <lightning-layout-item size="2">
+                        <lightning-button class="slds-var-p-around_small" label="Edit" icon-name="action:edit"
+                            icon-position="left" onclick={handleEdit}>
+                        </lightning-button>
+                        <!-- <lightning-button-icon icon-name="action:edit" alternative-text="Edit" title="Edit"
+                            class="slds-p-left_medium" onclick={handleEdit}></lightning-button-icon> -->
+                    </lightning-layout-item>
+                </lightning-layout>
+
+
+                <!-- <lightning-button label="Edit" onclick={handleEdit} class="slds-m-top_medium"></lightning-button> -->
+
+            </template>
+
+            <template if:false={viewMode}>
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item size="10">
+                        <lightning-textarea name="myTextArea" value={content} label="Comments"
+                            onchange={handleContentChange} class="slds-p-around_small">
+                        </lightning-textarea>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="2">                         
+                        <!-- <lightning-button-icon icon-name="utility:save" alternative-text="Save" title="Save"
+                            onclick={handleSave} class="slds-p-around_small"></lightning-button-icon>
+                        <lightning-button-icon icon-name="utility:close" alternative-text="Cancel" title="Cancel"
+                            onclick={handleCancel} class="slds-p-around_small"></lightning-button-icon> -->
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4">
+                     <lightning-button class="slds-var-p-around_small" label="Save" icon-name="utility:save"
+                            icon-position="left" onclick={handleSave}>
+                        </lightning-button>
+                         <lightning-button class="slds-var-p-around_small" label="Cancel" icon-name="utility:close"
+                            icon-position="left" onclick={handleCancel}>
+                        </lightning-button>
+                    </lightning-layout-item>
+                   
+                </lightning-layout>
+
+
+
+            </template>
+
+        </lightning-layout-item>
+        <lightning-layout-item size="2">
+        </lightning-layout-item>
+    </lightning-layout>
 </template>
