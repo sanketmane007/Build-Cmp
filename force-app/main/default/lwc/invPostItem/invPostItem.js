@@ -9,7 +9,11 @@ export default class InvPostItem extends LightningElement {
      UserName;
      createdDateAndTime;
      @track isSpinning;
+     isLoggedIn = false; //=== Check User is Logged in Or not  - Permission
      //== wait some time
+
+
+     
      wait(ms) {
           return new Promise(resolve => setTimeout(resolve, ms));
      }
@@ -19,6 +23,9 @@ export default class InvPostItem extends LightningElement {
      }
 
      connectedCallback() {
+          if (userId) {
+               this.isLoggedIn = true;
+          }
           this.content = this.post.Content__c || " ";
           this.UserName = this.post.User__r.FirstName + " " + this.post.User__r.LastName;
           this.formatDateTime(this.post.CreatedDate);
@@ -28,13 +35,29 @@ export default class InvPostItem extends LightningElement {
           const dateObject = new Date(apexDateTime);
           this.createdDateAndTime = dateObject.toLocaleString();
      }
+
      handleContentChange(event) {
           this.content = event.target.value;
+     }
 
-     }
      handleEdit() {
-          this.viewMode = false;
+          if (this.isLoggedIn) {
+               this.viewMode = false;
+          } else {
+              // const siteBaseUrl = window.location.origin;
+               // Append the login path
+              // const loginUrl = `${siteBaseUrl}/login`;
+               // Redirect to login page
+               // window.location.href = loginUrl;
+               const messageData = {
+                    message: "Please Login to Edit Post,", //Here is the login URL: " + loginUrl,
+                    theme: "warning",
+                    label: "warning!"
+               };
+               this.alertMethod(messageData);
+          }
      }
+
      handleCancel() {
           this.viewMode = true;
      }
@@ -52,6 +75,8 @@ export default class InvPostItem extends LightningElement {
                console.error('Error in wait:', error);
           });
 
+
+
           updatePost({ postId: this.post.Id, content: this.content })
                .then(result => {
                     console.log('result ===>>' + result);
@@ -65,7 +90,7 @@ export default class InvPostItem extends LightningElement {
                     this.alertMethod(messageData);
                })
                .catch(error => {
-                     const messageData = {
+                    const messageData = {
                          message: error.getMessage(),
                          theme: "Error",
                          label: "Error!"
@@ -73,6 +98,7 @@ export default class InvPostItem extends LightningElement {
                     this.alertMethod(messageData);
                     console.log('error ===>>' + JSON.stringify(error));
                })
+
      }
 
      //  Show Alert COmponent like Show Toas Message

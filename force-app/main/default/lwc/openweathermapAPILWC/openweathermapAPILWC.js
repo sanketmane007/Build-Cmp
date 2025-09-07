@@ -27,41 +27,41 @@ export default class OpenweathermapAPILWC extends LightningElement {
 
     extractWeatherData(data) {
         // Extracting and storing individual values
-       // this.weatherData = {
-            //city: this.changeCityName || '',
-            // iconURL: data.weather[0]?.icon ? `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` : '',
-            // mail: data.weather[0].main || 0,
-            // country: data.sys.country || 0,
-            // temperature: data.main.temp || 0,
-            // feelsLike: data.main.feels_like || 0,
-            // pressure: data.main.pressure || 0,
-            // description: data.weather[0].description || '',
-            // humidity: data.main.humidity || 0,
-            // windSpeed: data.wind.speed || 0,
-            // visibility: data.visibility || 0,
-            // cloudiness: data.clouds.all || 0,
-            // windDirection: data.wind.deg || 0,
-            // cod: data.cod,
-            // message : data.message || ''
-             
+        // this.weatherData = {
+        //city: this.changeCityName || '',
+        // iconURL: data.weather[0]?.icon ? `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` : '',
+        // mail: data.weather[0].main || 0,
+        // country: data.sys.country || 0,
+        // temperature: data.main.temp || 0,
+        // feelsLike: data.main.feels_like || 0,
+        // pressure: data.main.pressure || 0,
+        // description: data.weather[0].description || '',
+        // humidity: data.main.humidity || 0,
+        // windSpeed: data.wind.speed || 0,
+        // visibility: data.visibility || 0,
+        // cloudiness: data.clouds.all || 0,
+        // windDirection: data.wind.deg || 0,
+        // cod: data.cod,
+        // message : data.message || ''
+
         // Initialize weather data with defaults
-     this.weatherData = {
-         iconURL: data?.weather?.[0]?.icon ? `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` : '',         
-        mail: data?.weather?.[0]?.main ||  '',
-        country: data?.sys?.country || '',
-        temperature: data?.main?.temp || 0,
-        feelsLike: data?.main?.feels_like || 0,
-        pressure: data?.main?.pressure || 0,
-        description: data?.weather?.[0]?.description || '',
-        humidity: data?.main?.humidity || 0,
-        windSpeed: data?.wind?.speed || 0,
-        visibility: data?.visibility || 0,
-        cloudiness: data?.clouds?.all || 0,
-        windDirection: data?.wind?.deg || 0,
-        cod: data?.cod ?? 0,
-        message: data?.message || this.weatherData?.message || ''
-    };
-    
+        this.weatherData = {
+            iconURL: data?.weather?.[0]?.icon ? `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png` : '',
+            mail: data?.weather?.[0]?.main || '',
+            country: data?.sys?.country || '',
+            temperature: data?.main?.temp || 0,
+            feelsLike: data?.main?.feels_like || 0,
+            pressure: data?.main?.pressure || 0,
+            description: data?.weather?.[0]?.description || '',
+            humidity: data?.main?.humidity || 0,
+            windSpeed: data?.wind?.speed || 0,
+            visibility: data?.visibility || 0,
+            cloudiness: data?.clouds?.all || 0,
+            windDirection: data?.wind?.deg || 0,
+            cod: data?.cod ?? 0,
+            message: data?.message || this.weatherData?.message || ''
+        };
+
     }
 
     // Spinner Waiting method
@@ -89,32 +89,60 @@ export default class OpenweathermapAPILWC extends LightningElement {
             return;
         }
 
-         getWeatherAPI({ cityName:this.changeCityName })
+        getWeatherAPI({ cityName: this.changeCityName })
             .then(response => {
                 const parsedResponse = JSON.parse(response);
 
                 // Handle success response
                 if (parsedResponse.cod === 200) {
-                     console.log('this.parsedResponse ===>>' + JSON.stringify(parsedResponse));
+                    console.log('this.parsedResponse ===>>' + JSON.stringify(parsedResponse));
                     this.extractWeatherData(parsedResponse);
                     console.log('this.weatherData ===>>' + JSON.stringify(this.weatherData));
                     this.startSpinner();
+                    const messageData = {
+                        message: "Retrieved data successfully!!",
+                        theme: "success",
+                        label: "Success!"
+                    };
+                    this.alertMethod(messageData);
                 } else {
                     console.log('else - parsedResponse ===>>' + JSON.stringify(parsedResponse));
-                      
-                     this.extractWeatherData(parsedResponse);
+
+                    this.extractWeatherData(parsedResponse);
                     this.startSpinner();
-                   
+                    const messageData = {
+                        message: 'Please Enter valid City.. ',//+JSON.stringify(this.weatherData),
+                        theme: "error",
+                        label: "error!"
+                    };
+                    this.alertMethod(messageData);
                 }
             })
             .catch(error => {
                 this.startSpinner();
+
+                console.log('else - parsedResponse ===>>' + JSON.stringify(parsedResponse));
+                const messageData = {
+                    message: error.getMessage(),
+                    theme: "error",
+                    label: "error!"
+                };
+                this.alertMethod(messageData);
+
                 // Handle unexpected errors
                 this.weatherData = undefined;
                 console.error('Error fetching weather data:', JSON.stringify(error));
             });
     }
+
+    //== Show Alert Message based on Result like Toast message
+    alertMethod(messageData) {
+        const childComponent = this.template.querySelector('c-inv-alert-component');
+        if (childComponent) {
+            childComponent.handleAlertClick(messageData); // Call the child's method
+        }
     }
+}
 
 
 
